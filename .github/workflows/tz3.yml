@@ -16,4 +16,4 @@ jobs:
             python-version: ${{ matrix.python-version }}
             architecture: x64
       - name: Run test
-        run: python -m unittest -v discover .
+        run: python -m unittest discover -v .
