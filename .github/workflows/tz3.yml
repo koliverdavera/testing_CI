@@ -14,10 +14,19 @@ jobs:
       - run: echo "New push & commit received"
       - name: Check out reppository code
         uses: actions/checkout@v2
+
       - name: Set up all Python versions
         uses: actions/setup-python@v2
         with:
             python-version: ${{ matrix.python-version }}
             architecture: x64
+
       - name: Run test
         run: python -m unittest discover -v .
+
+      - name: send test results via Telegram
+        uses: ./
+        with:
+          to: ${{ secrets.TG_CHAT_ID }}
+          token: ${{ secrets.TG_TOKEN }}
+          message: All tests passed
