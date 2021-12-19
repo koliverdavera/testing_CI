@@ -6,7 +6,7 @@ import operator
 import time
 
 
-class TestMinMax(unittest.TestCase):
+class TestFunc(unittest.TestCase):
     # тесты для проверки корректности работы программы. Тестовые данные записываются в файл test_data.txt в формате
     # массива, где элементы массива разделены пробелом
     file_name = 'test_data.txt'

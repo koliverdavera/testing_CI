@@ -16,19 +16,25 @@ jobs:
         with:
             python-version: ${{ matrix.python-version }}
             architecture: x64
-  test:
+      - name: Check out reppository code
+        uses: actions/checkout@v2
+  TestFunc:
     runs-on: ubuntu-latest
     steps:
-    - name: Check out reppository code
-      uses: actions/checkout@v2
-    - name: Run test 1
-      run: python -m unittest discover -v .
 
-    - name: send test results via Telegram
+    - name: Run test
+      run: python -m unittest tests.TestFunc
+
+    - name: send results of test 1 via Telegram
       uses: yanzay/notify-telegram@v0.1.0
       if: always()
       with:
         chat: ${{ secrets.TG_CHAT_ID }}
         token: ${{ secrets.TG_TOKEN }}
         status: ${{ job.status }}
+  test2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run test 2
+        run: python -m unittest discover -v .
 
