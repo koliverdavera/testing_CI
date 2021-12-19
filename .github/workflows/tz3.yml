@@ -9,25 +9,26 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
         matrix:
-          python-version: [3.6, 3.7, 3.8, 3.9]
+          python-version: [3.8, 3.9]
     steps:
-      - name: Check out reppository code
-        uses: actions/checkout@v2
-
       - name: Set up all Python versions
         uses: actions/setup-python@v2
         with:
             python-version: ${{ matrix.python-version }}
             architecture: x64
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out reppository code
+      uses: actions/checkout@v2
+    - name: Run test 1
+      run: python -m unittest discover -v .
 
-      - name: Run test
-        run: python -m unittest discover -v .
-
-      - name: send test results via Telegram
-        uses: yanzay/notify-telegram@v0.1.0
-        if: always()
-        with:
-          chat: ${{ secrets.TG_CHAT_ID }}
-          token: ${{ secrets.TG_TOKEN }}
-          status: ${{ job.status }}
+    - name: send test results via Telegram
+      uses: yanzay/notify-telegram@v0.1.0
+      if: always()
+      with:
+        chat: ${{ secrets.TG_CHAT_ID }}
+        token: ${{ secrets.TG_TOKEN }}
+        status: ${{ job.status }}
 
