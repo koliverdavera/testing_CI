@@ -31,8 +31,8 @@ jobs:
           token: ${{ secrets.TG_TOKEN }}
           if: ${{ job.status == 'success'  }}
           message: |
-          Все тесты пройдены!
-          ${{ github.repository }}
+            Все тесты пройдены!
+            ${{ github.repository }}
 
 
 
