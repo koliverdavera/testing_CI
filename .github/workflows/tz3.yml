@@ -25,14 +25,11 @@ jobs:
         run: python -m unittest discover -v .
 
       - name: send test results via Telegram
-        uses: appleboy/telegram-action@master
+        uses: yanzay/notify-telegram@v0.1.0
         with:
-          to: ${{ secrets.TG_CHAT_ID }}
+          chat: ${{ secrets.TG_CHAT_ID }}
           token: ${{ secrets.TG_TOKEN }}
-          if: ${{ job.status == 'success'  }}
-          message: |
-            Все тесты пройдены!
-            ${{ github.repository }}
+          status: ${{ job.status }}
 
 
 
