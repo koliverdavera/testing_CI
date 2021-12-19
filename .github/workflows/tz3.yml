@@ -18,31 +18,42 @@ jobs:
             architecture: x64
       - name: Check out reppository code
         uses: actions/checkout@v2
-  TestFunc:
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Run test
-      run: python -m unittest discover -s tests.TestFunc
-
-    - name: send results of test 1 via Telegram
-      uses: yanzay/notify-telegram@v0.1.0
-      if: always()
-      with:
-        chat: ${{ secrets.TG_CHAT_ID }}
-        token: ${{ secrets.TG_TOKEN }}
-        status: ${{ job.status }}
-  test2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run test 2
-        run: python -m unittest discover -v .
-
-      - name: send results of test 1 via Telegram
-        uses: yanzay/notify-telegram@v0.1.0
+      - name: Run all tests
+        run: python -m unittest tests.py
+      - uses: yanzay/notify-telegram@v0.1.0
         if: always()
         with:
           chat: ${{ secrets.TG_CHAT_ID }}
           token: ${{ secrets.TG_TOKEN }}
           status: ${{ job.status }}
+
+
+
+#  TestFunc:
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#    - name: Run test
+#      run: python -m unittest discover -s tests.TestFunc
+#
+#    - name: send results of test 1 via Telegram
+#      uses: yanzay/notify-telegram@v0.1.0
+#      if: always()
+#      with:
+#        chat: ${{ secrets.TG_CHAT_ID }}
+#        token: ${{ secrets.TG_TOKEN }}
+#        status: ${{ job.status }}
+#  test2:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Run test 2
+#        run: python -m unittest discover -v .
+#
+#      - name: send results of test 1 via Telegram
+#        uses: yanzay/notify-telegram@v0.1.0
+#        if: always()
+#        with:
+#          chat: ${{ secrets.TG_CHAT_ID }}
+#          token: ${{ secrets.TG_TOKEN }}
+#          status: ${{ job.status }}
 
