@@ -29,10 +29,10 @@ jobs:
         with:
           to: ${{ secrets.TG_CHAT_ID }}
           token: ${{ secrets.TG_TOKEN }}
+          if: ${{ job.status == 'success'  }}
           message: |
-            ${{ github.actor }} created commit:
+          Все тесты пройдены!
+          ${{ github.repository }}
 
-            Commit message: ${{ github.event.commit[0].message }}
 
-            Tests status:
-            ${{ job.status }}
+
