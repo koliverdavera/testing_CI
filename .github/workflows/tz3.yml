@@ -31,5 +31,3 @@ jobs:
           token: ${{ secrets.TG_TOKEN }}
           status: ${{ job.status }}
 
-
-
