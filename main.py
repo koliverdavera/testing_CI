@@ -40,5 +40,6 @@ def main(file_name):
 if __name__ == '__main__':
     try:
         main('test_data.txt')
+        # в случае ошибки переполнения программа не закончит работу аварийно
     except OverflowError:
         print('Main function has given too large result')

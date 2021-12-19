@@ -31,6 +31,7 @@ class TestMinMax(unittest.TestCase):
 
 class CheckTime(unittest.TestCase):
     file_name = 'time_testing.txt'
+    time_limit = 0.1   # ввод ограничения по времени
 
     # Нагрузочное тестирование
     def test_check_time(self):
@@ -51,7 +52,7 @@ class CheckTime(unittest.TestCase):
                 start = time.time()
                 main('time_testing.txt')
                 end = time.time()
-                self.assertTrue(end - start < 0.1, 'Time limit exceeded')
+                self.assertTrue(end - start < self.time_limit, 'Time limit exceeded')
 
 
 class TestWrongData(unittest.TestCase):
@@ -60,12 +61,15 @@ class TestWrongData(unittest.TestCase):
 
     def test_empty_data(self):
         open(self.file_name, 'w').close()   # очистка файла
+        # проверка работы программы на пустом файле
         self.assertEqual(main(self.file_name), None, 'Execution on empty file has given non empty result')
 
     def test_strings_not_numbers(self):
         with open(self.file_name, 'w') as file:
+            # запись в файл с данными некорректных значений
             file.write('Some wrong data instead of numbers')
         with self.assertRaises(ValueError):
+            # ожидаем ошибку в преобразовании строковых данных к целочисленным
             get_file(self.file_name)
 
 
